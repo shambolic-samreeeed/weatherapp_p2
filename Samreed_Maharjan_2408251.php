@@ -178,5 +178,3 @@ function display_data($servername, $username, $password, $dbname)
 // Fetch weather data and connect to database
 echo connect_DB();
 ?>
-
-?>
