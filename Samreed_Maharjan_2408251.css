@@ -1,0 +1,339 @@
+/* 
+    Student Name: Samreed Maharjan
+    Student Id: 2408251
+ */
+
+/* Universal selector styles */
+* {
+  font-family: sans-serif;
+  color: #ebfffc;
+}
+
+/* Styling body part of the website  */
+body {
+  /* background-image: url("https://images.hdqwalls.com/download/sunset-in-the-forest-8k-zq-7680x4320.jpg"); */
+  background-image: url("https://i.pinimg.com/originals/d1/39/e9/d139e9fc625a7d90056eedb93f229b30.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+
+/* Style for error message */
+.error {
+  font-size: 20px;
+  display: none;
+}
+
+/* Container with all weather data*/
+
+.container1 {
+  width: 50%;
+  height: 260px;
+  background-color: rgba(108, 180, 238, 0.64);
+  margin-left: 10px;
+  margin-top: 30px;
+  border-radius: 50px;
+
+}
+
+
+.citysymbol{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: -24px;
+}
+
+.calendarsymbol{
+  display: flex;
+  gap: 10px;
+}
+
+/* Style for searchbar and search button including search glass */
+.searches {
+  display: flex;
+  justify-content: center;
+  margin-left: 20px;
+  margin-top: 5px;
+}
+
+.searchbar {
+  border: 0;
+  outline: 0;
+  height: 40px;
+  width: 600px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  background-color: #ebfffc;
+  padding-left: 20px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: black;
+  transition: all 0.3s ease 0s;
+}
+.searchglass {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+button {
+  border: 0;
+  outline: 0;
+  background: #ebfffc;
+  height: 42px;
+  width: 100px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  margin-left: 3px;
+  margin-top: 20px;
+  margin-right: 20px;
+  transition: all 0.3s ease 0s;
+}
+
+/* style for when hovering over the button */
+button:hover {
+  background-color: ed;
+  border-radius: 20px;
+  transition: all 0.3s ease 0s;
+}
+.searchbar:hover{
+    border-radius: 50px;
+    transition: all 0.3 ease 0s;
+}
+
+/* style for the main weather data including the image city and temperature */
+
+.weather_main {
+  padding-left: 30px;
+  padding-top: 20px;
+  margin-right: 30px;
+}
+.weatherimg {
+  height: 120px;
+  width: 120px;
+  position: absolute;
+  left: 600px;
+ 
+}
+
+.condition {
+  margin-top: -10px;
+  font-size: 28px;
+  
+  
+}
+#date{
+  font-size: 20px;
+  margin-bottom:20px ;
+}
+.city {
+  font-size: 20px;
+  align-items: center;
+}
+
+.temp {
+  font-size: 60px;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 100;
+}
+
+/* Start of style for the secondary information with humidity level pressure and wind information */
+.conditions_container{
+  margin-left: 10px;
+  margin-top: 20px;
+  height: 340px;
+  width: 50%;
+  border-radius: 50px;
+  align-items: center;
+  background-color: rgba(108, 180, 238, 0.64);
+}
+.container2, .container3, .container4, .container5{
+  height: 140px;
+  width: 350px;
+  margin-left: 20px;
+  margin-top: 20px;
+  background-color: rgba(19, 85, 139, 0.286);
+  display: inline-flex;
+  align-items: center;
+  justify-content: start;
+  border-radius: 50px;
+}
+
+.innercontainer2{
+  display: inline-block ;
+  position:absolute;
+  left: 220px;
+  font-size: 23px;
+}
+
+.innercontainer3{
+  display: inline-block ;
+  text-align: left;
+  position:absolute;
+  left: 595px;
+  font-size: 23px;
+
+}
+
+.innercontainer4{
+  display: inline-block ;
+  text-align: left;
+  position:absolute;
+  left: 220px;
+  font-size: 23px;
+}
+
+.innercontainer5{
+  display: inline-block ;
+  text-align: left;
+  position:absolute;
+  left: 595px;
+  font-size: 23px;
+}
+
+#humiditySymbol{
+  font-size: 80px;
+  position: absolute;
+  left: 90px;
+}
+
+#atmosphericSymbol{
+  font-size: 80px;
+  position: absolute;
+  left: 460px;
+}
+
+#windspeedSymbol{
+  font-size: 80px;
+  position: absolute;
+  left: 90px;
+}
+
+#winddirectionSymbol{
+  font-size: 80px;
+  position: absolute;
+  left: 460px;
+}
+
+
+
+
+
+/* clock */
+.clock {
+  text-align: center;
+}
+.clock ul {
+  list-style: none;
+  display: flex;
+  font-size: 20px;
+  gap: 2px;
+  margin-bottom: -10px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+/* footer contents */
+
+footer {
+  /* background: linear-gradient(115deg, #50c8f0, #4072e7); */
+  width: 100vw;
+  height: 75px;
+  position: fixed;
+  bottom: 0px;
+  text-align: center;
+}
+
+.copyright {
+  font-size: 14px;
+  font-weight: 50;
+}
+.weatherdata {
+  font-weight: 100;
+  font-size: 12px;
+}
+.weatherdatalink {
+  text-decoration: none;
+  color: #ffd700;
+  font-weight: 200;
+}
+.logo {
+  height: 60px;
+  width: 60px;
+  margin: 5px;
+  
+}
+
+.logotxt{
+  position: absolute;
+  left: 70px;
+  top: 8px;
+  font-weight: 100;
+  letter-spacing: 2px;
+}
+.logosection{
+  box-shadow: 2px 2px lightblue;
+  border-top-left-radius:20px ;
+  border-bottom-right-radius: 20px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  height: 70px;
+  width: 160px;
+  background-color: rgba(108, 180, 238, 0.64);
+}
+
+.first_two, .second_two, .third_two{
+  margin-left: 22px;
+  display: inline-flex; 
+  gap: 15px;
+}
+
+.box1, .box2, .box3, .box4, .box5, .box6{
+  height: 160px;
+  width: 330px;
+  margin-bottom:15px;
+  border: 2px solid rgba(122, 192, 245, 0.42);
+  /* background-color: rgba(108, 180, 238, 0.64); */
+  border-radius: 50px;
+}
+
+.date{
+  text-align: center;
+}
+.symbol{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 10px;
+}
+
+.pastWeatherContainer{
+  height:620px;
+  width: 47%;
+  background-color: rgba(108, 180, 238, 0.64);
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  border-radius: 50px;
+}
+.daysContainer{
+
+  
+}
+.innerContents {
+  display: flex;
+  
+
+  
+}
+
+.innerContents p {
+
+padding-left: 40px;
+padding-right: 40px;
+
+}
