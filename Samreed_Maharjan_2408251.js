@@ -8,7 +8,7 @@ const searchBox = document.querySelector(".searches input");
 const searchBtn = document.querySelector(".searches button");
 const weatherIcon = document.querySelector(".weatherimg");
 const cityName = "Dibrugarh";
-const weekContainer=document.querySelector(".daysContainer");
+const weekContainer=document.querySelector(".week-container");
 
 /* The async and await keywords help return and wait for a promise. the async keywords returns promise whereas the await keyword  waits until the promis is returned*/
 async function checkWeather(city) {
@@ -20,7 +20,7 @@ async function checkWeather(city) {
     document.querySelector(".div2").style.display = "none";
   } else {
     var data = await response.json();
-
+    
     console.log(data);
 
     // Updating the contents with the data from the api
@@ -137,53 +137,79 @@ function clock() {
 }
 var inter = setInterval(clock, 400);
 
-//pastweather
+async function fetchDataFromAPIandStoreToDb(city) {
+  const apiKey = "7af5331f2d5f06a34fcb20d6f92962a0";
+  const apiUrl = "http://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+  const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+  if (response.status !== 404) {
+      var data = await response.json();
+      console.log("Data fetched from API:", data);
 
-async function pastWeatherData(){
-  try{
-    document.querySelector("pastWeatherContainer h1").innerText= `${cityName} Past Weather`;
-    //fetching past data from php
-    let url=`http://localhost/Samreed_Maharjan_2408251_Prototype2/Samreed_Maharjan_2408251.php`;
-    let response=await fetch (url);
-    if (!response.ok){
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }else{
-      let data=await response.json();
-      let weekBoxHTML="";
+      var formData = new FormData();
+      formData.append('day_of_week');
+      formData.append('day_and_date');
+      formData.append('weather_condition', data.weather[0].description);
+      formData.append('weather_icon', data.weather[0].icon);
+      formData.append('temperature', data.main.temp);
+      formData.append('wind_speed', data.wind.speed);
+      formData.append('humidity', data.main.humidity);
+      formData.append('pressure', data.main.pressure);
+      formData.append('city', city);
 
-      data.foreach((weather)=>{
-        weekBoxHTML+=`
-        <div class="week-box">
-        <div class="date">${weather.Day_and_Date}</div>
-        <div class="db-info">
-        <p>${weather.Day_of_Week}</p>
-        <figure><img src="./icons/ ${weather.Weather_Icon}.svg" /></figure>
-        <p>${weather.Temperature}°C</p>
-        <p>${weather.Pressure} Pa</p>
-        <p>${weather.Wind_Speed}m/s</p>
-        <p>${weather.Humidity}%</p>
-        </div>
-        </div>
-        <hr>`;
-      });
-
-      //set inner html
-      weekContainer.innerHTML=weekBoxHTML;
-      savePastData();
-    }
-  }catch(error){
-    console.error(error);
+      fetch('http://localhost/Samreed_Maharjan_2408251_Prototype2/Samreed_Maharjan_2408251.php', { method: 'POST', body: formData }).then((storeResp) => {
+          return storeResp.text();
+      }).then((body) => {
+          console.log("Response from server:", body);
+          if (body === 'success') {
+              getDataFromDb();
+          } else {
+              document.querySelector(".week-container").innerHTML = "Failed to save To Database";
+          }
+      })
   }
 }
 
-//pastdatacall
-pastWeatherData();
-function savePastData(){
-  localStorage.setItem("data", weekContainer.innerHTML);
+
+
+var cityNameFromUI="Dibrugarh"
+function getDataFromDb() {
+  var url = 'http://localhost/Samreed_Maharjan_2408251_Prototype2/Samreed_Maharjan_2408251.php?city=' + cityNameFromUI;
+  console.log("Fetching data from URL:", url);
+  fetch(url).then(function(response) {
+          return response.json();
+      }).then(function(jsonResponse) {
+          console.log("Response from database:", jsonResponse);
+          if (jsonResponse[0].result === 'no data') {
+              console.log("No data found in the database. Fetching from API.");
+              document.querySelector(".week-container").innerHTML = "NO Data.. Fetching from API";
+              fetchDataFromAPIandStoreToDb(cityNameFromUI);
+          } else {
+              var weekBoxHTML = "";
+              jsonResponse[0].data.forEach(weather => {
+                  weekBoxHTML += `<div class="week-box">
+                      <div class="date">${weather.Day_and_Date}</div>
+                      <div class="db-info">
+                          <p>${weather.Day_of_Week}</p>
+                          <figure><img src="./icons/${weather.Weather_Icon}.svg" /></figure>
+                          <p>${weather.Temperature}°C</p>
+                          <p>${weather.Pressure} Pa</p>
+                          <p>${weather.Wind_Speed}m/s</p>
+                          <p>${weather.Humidity}%</p>
+                      </div>
+                  </div>
+                  <hr>`;
+              });
+              document.querySelector(".week-container").innerHTML = weekBoxHTML;
+          }
+
+      })
+      .catch(error => {
+          console.error("Error fetching data:", error);
+          document.querySelector(".week-container").innerHTML = "Error fetching data";
+      });
 }
 
-function showPastData(){
-  weekContainer.innerHTML=localStorage.getItem("data");
-}
+getDataFromDb();
 
-showPastData();
+
+
